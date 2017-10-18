@@ -15,7 +15,7 @@
   // https://github.com/umdjs/umd/blob/master/returnExports.js
   if (typeof module === 'object' && module.exports) {
     // Node
-    module.exports = factory(require('lib/punycode'), require('lib/IPv6'), require('lib/SecondLevelDomains'));
+    module.exports = factory(require('test/lib/punycode'), require('test/lib/IPv6'), require('test/lib/SecondLevelDomains'));
   } else if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['./punycode', './IPv6', './SecondLevelDomains'], factory);
@@ -213,14 +213,14 @@
   // best solution in a regex-golf we did a couple of ages ago at
   // * http://mathiasbynens.be/demo/url-regex
   // * http://rodneyrehm.de/t/url-regex.html
-  URI.find_uri_expression = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
+  URI.find_uri_expression = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]))/ig;
   URI.findUri = {
     // valid "scheme://" or "www."
     start: /\b(?:([a-z][a-z0-9.+-]*:\/\/)|www\.)/gi,
     // everything up to the next whitespace
     end: /[\s\r\n]|$/,
     // trim trailing punctuation captured by end RegExp
-    trim: /[`!()\[\]{};:'".,<>?«»“”„‘’]+$/
+    trim: /[`!()\[\]{};:'".,<>?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]+$/
   };
   // http://www.iana.org/assignments/uri-schemes.html
   // http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports
@@ -699,7 +699,7 @@
   };
   URI.buildQuery = function(data, duplicateQueryParameters, escapeQuerySpace) {
     // according to http://tools.ietf.org/html/rfc3986 or http://labs.apache.org/webarch/uri/rfc/rfc3986.html
-    // being »-._~!$&'()*+,;=:@/?« %HEX and alnum are allowed
+    // being ï¿½-._~!$&'()*+,;=:@/?ï¿½ %HEX and alnum are allowed
     // the RFC explicitly states ?/foo being a valid use case, no mention of parameter syntax!
     // URI.js treats the query string as being application/x-www-form-urlencoded
     // see http://www.w3.org/TR/REC-html40/interact/forms.html#form-content-type
