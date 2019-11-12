@@ -8,8 +8,8 @@
  * Contributors:
  *   SAP - initial API and implementation
  */
-var response = require("http/response");
-var request = require("http/request");
+var response = require("http/v4/response");
+var request = require("http/v4/request");
 var URI = require("test/lib/URI");
 
 var findInAcceptHeader = function(httpReqHeaderAccept, mime){
@@ -40,7 +40,7 @@ exports.run = function(settings) {
 			
 			var requestUrl = URI(request.getRequestURL()).normalizePath().path();
 			console.info('[Test Runner] redirecting to /services/v4/web/test/v4/ui/tests_dashboard.html with URL query string rewrite to url='+requestUrl);
-			response.addHeader('Location', '/services/v3/web/test/v4/ui/tests_dashboard.html?url='+requestUrl);
+			response.addHeader('Location', '/services/v4/web/test/v4/ui/tests_dashboard.html?url='+requestUrl);
 			response.setStatus(response.FOUND);
 			
 		} else if (findInAcceptHeader(httpReqHeaderAccept, 'application/xml') || findInAcceptHeader(httpReqHeaderAccept, 'text/xml') || findInAcceptHeader(httpReqHeaderAccept, '*/xml')){
